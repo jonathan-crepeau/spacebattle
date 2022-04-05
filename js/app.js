@@ -61,7 +61,7 @@ const jonathan = new Battleship('Firefly');
 //   game.attack(jonathan, game.alienShips[0])
 // }
 
-let user = new Battleship(prompt('What is your name?'));
+// let user = new Battleship(prompt('What is your name?'));
 
 function playGame(human) {
   for (let a = 0; a < 2; a++) {
@@ -72,5 +72,14 @@ function playGame(human) {
   }
 }
 
-playGame(user);
+// playGame(user);
 
+
+// create user with prompt
+
+// stock array in gme object with six alien ships using for loop
+
+// playGame(user) function
+  // while (user.hull > 0) {
+    // 
+  // }
