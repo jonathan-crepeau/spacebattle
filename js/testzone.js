@@ -39,7 +39,12 @@ class Battleship extends Ship {
     this.accuracy = 0.7;
   }
   attack(){
-    console.log('Battleship attack!');
+    if (Math.random() < this.accuracy) {
+      console.log('Battleship attack!');
+      game.alienShips[0].hull -= this.firepower;
+    } else {
+      console.log('Your laser missed!');
+    }
   }
 }
 
@@ -51,8 +56,12 @@ class Alien extends Ship {
     this.accuracy = (Math.random() * (0.8 - 0.7) + 0.7).toFixed(2);
   }
   attack(){
+    if (Math.random() < this.accuracy) {
     console.log('Alien attack!');
-    this.hull = this.hull -= 1;
+    user.hull -= this.firepower;
+    } else {
+      console.log('Alien laser missed!');
+    }
   }
 }
 
@@ -64,12 +73,12 @@ const game = {
 
 // SECTION - "Seed" Data for Game:
 const user = new Battleship(prompt('What is your name?'));
-console.log(user);
+// console.log(user);
 
 for (let a = 0; a < 6; a++) {
   game.alienShips.push(new Alien('alien' + (a + 1)));
 }
-console.log(game.alienShips);
+// console.log(game.alienShips);
 
 
 
@@ -87,8 +96,9 @@ function battle(player1, player2) {
     player1.attack();
     player2.attack();
   }
+  console.log(user);
   game.alienShips.splice(0, 1);
-  if (game.alienShips.length > 0) {
+  if (game.alienShips.length > 0 && user.hull > 0) {
     let response = prompt('Do you want to attack the next ship?').toLowerCase();
     console.log(response);
     if (response == 'yes') {
@@ -97,9 +107,12 @@ function battle(player1, player2) {
     } else {
       console.log('Retreat!');
     }
-  } else {
+  } else if (game.alienShips.length == 0) {
     console.log('Winner! All alien ships exterminated!');
+  } else {
+    console.log('Game over!')
   }
 }
 
-playGame(user);
+// NOTE - Start game:
+// playGame(user);
