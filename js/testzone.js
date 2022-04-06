@@ -87,7 +87,19 @@ function battle(player1, player2) {
     player1.attack();
     player2.attack();
   }
-  prompt ('Do you want to attack the next ship?')
+  game.alienShips.splice(0, 1);
+  if (game.alienShips.length > 0) {
+    let response = prompt('Do you want to attack the next ship?').toLowerCase();
+    console.log(response);
+    if (response == 'yes') {
+      console.log('Next ship!');
+      return battle(user, game.alienShips[0]);
+    } else {
+      console.log('Retreat!');
+    }
+  } else {
+    console.log('Winner! All alien ships exterminated!');
+  }
 }
 
 playGame(user);
